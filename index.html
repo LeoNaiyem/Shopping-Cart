@@ -2,7 +2,7 @@
 <html>
 
 <head>
-   <title>Shopping Cart</title>
+   <title>Cantonment Mobile Market</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -14,33 +14,9 @@
 
    <section>
       <div class="container">
-         
-
-         <div class="row user-info" id="user-info">
-               <div class="col-md-12 text-center">
-                  <h1>Welcome To Cantonment Mobile Market</h1><hr><br>
-                  
-               </div>
-               <div class="col-md-2">Email :</div>
-               <div class="col-md-10">
-                  <input type="text" name="" id="user-email" class="form-control" placeholder="Enter Your Email"><br>
-               </div>
-
-               <div class="col-md-2">Password :</div>
-               <div class="col-md-10">
-                  <input type="password" id="user-password" class="form-control" placeholder="Enter Your Password"><br>
-               </div>
-           
-               <div class="col-md-12">
-                  <button class="btn btn-success float-right" id="user-info-btn">Log In</button>
-               </div>
-            
-            
-         </div>
-
-         <div class="cart" id="cart">
-            <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto" id="itemswrapper">
+               <div class="cart-item" id="item1">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
@@ -49,12 +25,31 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default decrement-quantity-btn"><i class="fas fa-minus"></i></button>                           
-                           <input type="text" class="form-control text-center quantity" value="1" id="quantity1">
-                           <button class="btn btn-default increment-quantity-btn"><i class="fas fa-plus"></i></button>
+                           <button id="decrementItem1" class="btn btn-default item-increment"><i class="fas fa-minus"></i></button>
+                           <input id="itemCount1" type="text" class="form-control text-center" value="1">
+                           <button id="incrementItem1" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$<span class="price">1219<span></span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <h5>$<span id="itemPrice1">1219</span></h5>
+                        <img id="removeItem1" src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item" id="item2">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="decrementItem2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="itemCount2" type="text" class="form-control text-center" value="1">
+                           <button id="incrementItem2" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$<span id="itemPrice2">59</span></h5>
+                        <img id="removeItem2" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -64,35 +59,103 @@
 
                      <div class="col-md-8">
                         <h5>Subtotal: </h5>
-                        <h5>Tax:</h5>
+                        <h5>Tax (10% of Subtotal):</h5>
                         <h5>Total:</h5>
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$<span id="subtotal">0</span></h5>
+                        <h5>$<span id="tax">0</span></h5>
+                        <h5>$<span id="total">0</span></h5>
                      </div>
                   </div>
                </div>
                <div class="col-md-12 pt-4 pb-4">
-                  <button type="button" class="btn btn-success check-out">Check Out</button>
+                  <button id="checkoutbtn" type="button" class="btn btn-success check-out">Check Out</button>
                </div>
             </div>
          </div>
       </div>
    </section>
-
-
    <script>
-      const userInfoBtn = document.getElementById("user-info-btn");
-      const incrementQuantityBtnList = document.querySelectorAll(".increment-quantity-btn");
-      const decrementQuantityBtnList = document.querySelectorAll(".decrement-quantity-btn");
-      const checkoutBtn = document.getElementById("checkout-btn");
-      const finishOrderBtn = document.getElementById("finish-order-btn");
-      const userInfo = document.getElementById("user-info");
-      const cart = document.getElementById("cart");
-      const invoice = document.getElementById("invoice");
+
+
+   const incrementItemBtn1 = document.getElementById("incrementItem1");
+   incrementItemBtn1.addEventListener("click", function(){
+      itemCountHandler("itemCount1" , "itemPrice1" , "increment");
+   });
+
+
+   const incrementItemBtn2 = document.getElementById("incrementItem2");
+   incrementItemBtn2.addEventListener("click", function(){
+      itemCountHandler("itemCount2" , "itemPrice2" , "increment");
+   });
+
+
+   const decrementItemBtn1 = document.getElementById("decrementItem1");
+   decrementItemBtn1.addEventListener("click", function(){
+      itemCountHandler("itemCount1" , "itemPrice1" , "decrement");
+   })
+
+
+   const decrementItemBtn2 = document.getElementById("decrementItem2");
+   decrementItemBtn2.addEventListener("click", function(){
+      itemCountHandler("itemCount2" , "itemPrice2" , "decrement");
+   })
+
+
+   const itemDeleteBtn1 = document.getElementById("removeItem1");
+   itemDeleteBtn1.addEventListener("click", function(){
+      RemoveItemFromCart("item1", "itemPrice1")
+   }) 
+
+
+   const itemDeleteBtn2 = document.getElementById("removeItem2");
+   itemDeleteBtn2.addEventListener("click", function(){
+      RemoveItemFromCart("item2", "itemPrice2")
+   })
+
+
+
+   function itemCountHandler(itemCountId, itemPriceId , type){
+      const itemCount = document.getElementById(itemCountId).value;
+      const newItemCount = type == "increment" ? parseFloat(itemCount) + 1 : parseFloat(itemCount) - 1 ;
+      const itemPrice = document.getElementById(itemPriceId).innerText;
+      var itemPriceAmount = parseFloat(itemPrice);
+
+      const itemOriginalPrice = itemPriceAmount / itemCount;
+      if(newItemCount <= 1){
+         document.getElementById(itemCountId).value = 1;
+         document.getElementById(itemPriceId).innerText = itemOriginalPrice;
+      }else{
+         document.getElementById(itemCountId).value = newItemCount;
+         const decrementedPrice =  itemOriginalPrice * newItemCount;
+         document.getElementById(itemPriceId).innerText = decrementedPrice;
+   }
+   updateTotal();
+   }
+
+   function updateTotal(){
+      const priceOfItem1 = document.getElementById("itemPrice1").innerText;
+      const priceOfItem2 = document.getElementById("itemPrice2").innerText;
+      const getSubTotal = parseFloat(priceOfItem1) + parseFloat(priceOfItem2);
+      document.getElementById('subtotal').innerText = getSubTotal;
+
+
+      const tax = getSubTotal * 10 / 100 ;
+      document.getElementById('tax').innerText =  tax;
+      document.getElementById('total').innerText = getSubTotal + tax;
+      if(getSubTotal < 1){
+         checkOutBtn.style.display ="none";
+      }
+   }
+
+   function RemoveItemFromCart(itemId, ItemPriceId){
+      document.getElementById(itemId).style.display= "none";
+      document.getElementById(ItemPriceId).innerText = 0;
+      updateTotal();
+   }
+   updateTotal();
 
    </script>
 </body>
