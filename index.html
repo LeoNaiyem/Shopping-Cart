@@ -23,12 +23,12 @@
                </div>
                <div class="col-md-2">Email :</div>
                <div class="col-md-10">
-                  <input type="text" name="" id="user-name" class="form-control" placeholder="Enter Your Email"><br>
+                  <input type="text" name="" id="user-email" class="form-control" placeholder="Enter Your Email"><br>
                </div>
 
                <div class="col-md-2">Password :</div>
                <div class="col-md-10">
-                  <input type="password" id="user-address" class="form-control" placeholder="Enter Your Password"><br>
+                  <input type="password" id="user-password" class="form-control" placeholder="Enter Your Password"><br>
                </div>
            
                <div class="col-md-12">
@@ -82,6 +82,19 @@
          </div>
       </div>
    </section>
+
+
+   <script>
+      const userInfoBtn = document.getElementById("user-info-btn");
+      const incrementQuantityBtnList = document.querySelectorAll(".increment-quantity-btn");
+      const decrementQuantityBtnList = document.querySelectorAll(".decrement-quantity-btn");
+      const checkoutBtn = document.getElementById("checkout-btn");
+      const finishOrderBtn = document.getElementById("finish-order-btn");
+      const userInfo = document.getElementById("user-info");
+      const cart = document.getElementById("cart");
+      const invoice = document.getElementById("invoice");
+
+   </script>
 </body>
 
 </html>
