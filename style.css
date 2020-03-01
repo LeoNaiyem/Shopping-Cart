@@ -1,6 +1,15 @@
 body{
 	background: #fff;
 }
+
+.user-info{
+	background-color: rgb(221, 247, 247);
+	padding: 30px;
+	margin-top: 50px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 10px gray;
+}
+
 .cart{
 	margin: 100px 0;
 	background-color: #F6F5FA;;
